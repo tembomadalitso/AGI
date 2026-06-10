@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Truck } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, CheckCircle2, ShieldCheck, Sparkles, Truck } from 'lucide-react';
 import { Section } from '../components/Section';
 import { Container } from '../components/Container';
 import { Button } from '../components/Button';
@@ -8,16 +8,16 @@ import { company, stats } from '../utils/content';
 
 export function HeroSection() {
   const itemVariants = {
-    hidden: { opacity: 0, y: 22 },
+    hidden: { opacity: 0, y: 12 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] },
     },
   };
 
   return (
-    <Section id="home" background="gradient" className="flex min-h-[calc(100vh-73px)] items-center overflow-hidden pb-16 pt-12 sm:pb-20 lg:pt-16">
+    <Section id="home" background="gradient" className="flex min-h-[calc(100vh-73px)] items-center overflow-hidden pb-16 pt-16 sm:pb-20 lg:pt-24">
       <div className="absolute inset-0 bg-grid opacity-50" />
       <Container className="relative">
         <motion.div
@@ -36,14 +36,14 @@ export function HeroSection() {
 
             <motion.h1
               variants={itemVariants}
-              className="max-w-4xl text-5xl font-black leading-[0.98] text-[rgb(var(--color-ink))] sm:text-6xl lg:text-7xl"
+              className="max-w-4xl text-5xl font-bold tracking-tight leading-[1.05] text-[rgb(var(--color-ink))] sm:text-6xl lg:text-7xl"
             >
               {company.heroTitle}
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
-              className="mt-7 max-w-2xl text-lg leading-8 text-[rgb(var(--color-muted-ink))] sm:text-xl"
+              className="mt-7 max-w-2xl text-lg leading-relaxed text-[rgb(var(--color-muted-ink))] sm:text-xl"
             >
               {company.heroCopy}
             </motion.p>
@@ -59,12 +59,30 @@ export function HeroSection() {
                 size="lg"
                 className="gap-2"
               >
-                Request a quotation
+                Get in touch
                 <ArrowRight size={20} />
               </Button>
-              <Button as="a" href="#services" variant="secondary" size="lg">
-                Explore services
+              <Button
+                as="a"
+                href="#services"
+                variant="secondary"
+                size="lg"
+              >
+                View services
               </Button>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="mt-6 flex items-center gap-6">
+              <a
+                href="#"
+                className="text-sm font-bold text-[rgb(var(--color-muted-ink))] transition-colors hover:text-[rgb(var(--color-accent))] flex items-center gap-2"
+                onClick={(e) => e.preventDefault()}
+              >
+                <div className="size-8 rounded bg-[rgb(var(--color-panel-soft))] grid place-items-center">
+                  <ArrowUpRight size={14} />
+                </div>
+                Download Company Profile
+              </a>
             </motion.div>
 
             <motion.div

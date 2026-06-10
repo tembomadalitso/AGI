@@ -7,21 +7,26 @@ export function Footer() {
   const links = ['About', 'Services', 'Values', 'Contact'];
 
   return (
-    <footer className="bg-[rgb(var(--color-ink))] py-16 text-[rgb(var(--color-canvas))] sm:py-20">
+    <footer className="bg-[rgb(var(--color-ink))] py-20 text-[rgb(var(--color-canvas))] sm:py-28">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_1fr]">
+        <div className="grid gap-16 lg:grid-cols-[1.2fr_0.8fr_1fr]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="mb-5 inline-flex size-12 items-center justify-center rounded-lg bg-[rgb(var(--color-canvas))] text-sm font-black text-[rgb(var(--color-ink))]">
-              AGI
+            <div className="mb-6 flex items-center gap-4">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[rgb(var(--color-accent))]">
+                 <span className="text-[15px] font-bold text-white tracking-tighter">AGI</span>
+              </div>
+              <span className="text-[14px] font-bold tracking-[0.2em] uppercase text-white">
+                 Enterprise
+              </span>
             </div>
-            <h3 className="mb-4 max-w-sm text-3xl font-black leading-tight sm:text-4xl">
-              Procurement built for trust, clarity, and delivery.
+            <h3 className="mb-6 max-w-sm text-3xl font-bold tracking-tight leading-tight sm:text-4xl">
+              Setting the benchmark for excellence.
             </h3>
-            <p className="max-w-md text-sm leading-7 text-white/65">
+            <p className="max-w-md text-[15px] leading-relaxed text-white/50">
               {company.description}
             </p>
           </motion.div>
@@ -72,9 +77,11 @@ export function Footer() {
           </motion.div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>© 2026 {company.name}. All rights reserved.</p>
-          <p>{company.strapline}</p>
+        <div className="mt-20 flex flex-col gap-6 border-t border-white/5 pt-10 text-[13px] font-medium text-white/30 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 {company.name}. Zambian Registered Enterprise.</p>
+          <div className="flex items-center gap-8">
+            <span className="italic tracking-wide text-white/20">{company.strapline}</span>
+          </div>
         </div>
       </Container>
     </footer>

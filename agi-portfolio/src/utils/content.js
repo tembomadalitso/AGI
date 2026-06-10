@@ -26,16 +26,16 @@ import {
 export const company = {
   name: 'AGI Enterprise Limited',
   shortName: 'AGI',
-  strapline: 'Innovative and collaborative supply solutions.',
-  heroTitle: 'Premium procurement for institutions that cannot afford delays.',
+  strapline: 'Strategic Procurement. Reliable Supply. Institutional Growth.',
+  heroTitle: 'Precision Procurement and Supply Solutions for Zambia’s Leading Institutions.',
   heroCopy:
-    'AGI Enterprise Limited is a registered Zambian supplier delivering dependable, cost-effective goods and procurement support for public and private sector operations.',
+    'AGI Enterprise Limited is a premier Zambian provider of comprehensive procurement and supply services. We empower public and private sector organizations with dependable, high-quality solutions tailored to modern operational requirements.',
   description:
-    'AGI Enterprise Limited supports organizations with reliable general supply, procurement, and delivery solutions. The company serves public and private sector institutions with quality products tailored to operational needs, timelines, and budgets.',
+    'AGI Enterprise Limited is a strategic partner for organizations seeking seamless supply chain solutions. We bridge the gap between institutional needs and high-quality deliverables across diverse sectors, ensuring efficiency and cost-effectiveness at every stage.',
   mission:
-    'To empower public and private sector institutions with reliable, high-quality, and cost-effective procurement solutions that improve operational efficiency and support sustainable growth.',
+    'To empower public and private sector institutions by delivering reliable, high-quality, and cost-effective procurement solutions that enhance operational efficiency and support sustainable organizational growth.',
   vision:
-    'To become Zambia\'s most reliable and innovative provider of quality goods and services.',
+    'To become Zambia’s most reliable and innovative provider of quality goods and services, setting the benchmark for excellence in the supply chain industry.',
   contact: {
     address: 'Mpika St, Nchanga, CHTS Shops',
     phonePrimary: '0761700608',
@@ -45,9 +45,9 @@ export const company = {
 };
 
 export const stats = [
-  { label: 'Service categories', value: '6+' },
-  { label: 'Core values', value: '5' },
-  { label: 'National delivery focus', value: 'ZM' },
+  { label: 'Service Categories', value: '6+' },
+  { label: 'Operational Reach', value: 'Nationwide' },
+  { label: 'Strategic Values', value: '5' },
 ];
 
 export const services = [
@@ -55,102 +55,102 @@ export const services = [
     icon: Cpu,
     title: 'ICT & Office Solutions',
     summary:
-      'Technology, print consumables, and office essentials that help teams work with fewer interruptions.',
-    items: ['ICT equipment and accessories', 'Toners, cartridges, and printer supplies', 'Office furniture'],
+      'Providing high-performance technology, print consumables, and office essentials for modern work environments.',
+    items: ['ICT equipment and accessories', 'Premium print consumables', 'Ergonomic office furniture'],
   },
   {
     icon: Blocks,
-    title: 'IT & Digital Solutions',
+    title: 'IT & Digital Infrastructure',
     summary:
-      'Compliance-ready hardware procurement and software licensing for modern administrative environments.',
-    items: ['Hardware procurement', 'Retail software licensing', 'Cashless revenue system support'],
+      'Compliant hardware procurement and software licensing to support robust administrative and digital operations.',
+    items: ['Enterprise hardware procurement', 'Software licensing and compliance', 'Digital payment system support'],
   },
   {
     icon: Sparkles,
-    title: 'Cleaning & Hygiene Supplies',
+    title: 'Hygiene & Facilities Supply',
     summary:
-      'High-quality consumables and safety essentials for clean, safe, and well-maintained workspaces.',
-    items: ['Cleaning supplies and detergents', 'Household consumables', 'PPE, safety gear, and first aid'],
+      'Professional-grade consumables and safety essentials to maintain clean, secure, and compliant workspaces.',
+    items: ['Industrial cleaning supplies', 'Healthcare-standard consumables', 'PPE and safety equipment'],
   },
   {
     icon: Wrench,
-    title: 'Construction, Electrical & Hardware',
+    title: 'Construction & Industrial Hardware',
     summary:
-      'Robust materials and reliable tools for construction, maintenance, and infrastructure work.',
-    items: ['Building materials', 'Electrical and plumbing supplies', 'Industrial tools and equipment'],
+      'Sourcing robust materials and industrial tools for infrastructure maintenance and construction projects.',
+    items: ['Building and civil materials', 'Electrical and plumbing hardware', 'Industrial tools and machinery'],
   },
   {
     icon: Leaf,
-    title: 'Agriculture & Automotive Supplies',
+    title: 'Operational & Automotive Support',
     summary:
-      'Essential products that support productivity, field operations, and mobility across sectors.',
-    items: ['Agricultural supplies', 'Automotive essentials', 'Operational support products'],
+      'Specialized supplies supporting productivity, field operations, and mobility across various sectors.',
+    items: ['Agricultural inputs', 'Automotive parts and fluids', 'Fleet maintenance supplies'],
   },
   {
     icon: Paintbrush,
-    title: 'Branding Services',
+    title: 'Corporate Branding',
     summary:
-      'Professional branding solutions that strengthen business identity and create a cohesive market presence.',
-    items: ['Corporate identity support', 'Branded materials', 'Professional presentation assets'],
+      'Strategic branding solutions that enhance organizational identity and market presence through quality assets.',
+    items: ['Identity design support', 'Branded corporate materials', 'Professional collateral'],
   },
 ];
 
 export const values = [
-  { icon: ShieldCheck, title: 'Integrity', copy: 'Transparent dealings and principled decisions at every step.' },
-  { icon: BadgeCheck, title: 'Reliability', copy: 'Consistent quality, dependable sourcing, and delivery commitments.' },
-  { icon: Zap, title: 'Efficiency', copy: 'Lean procurement workflows that protect timelines and budgets.' },
-  { icon: Lightbulb, title: 'Innovation', copy: 'Modern solutions that improve how organizations source and operate.' },
-  { icon: CheckCircle2, title: 'Accountability', copy: 'Clear ownership from quotation through fulfillment.' },
+  { icon: ShieldCheck, title: 'Integrity', copy: 'We maintain the highest ethical standards in all procurement processes.' },
+  { icon: BadgeCheck, title: 'Reliability', copy: 'Consistent delivery on quality and timelines for every client engagement.' },
+  { icon: Zap, title: 'Efficiency', copy: 'Streamlined workflows that optimize resource allocation and minimize delays.' },
+  { icon: Lightbulb, title: 'Innovation', copy: 'Implementing modern sourcing strategies to solve complex supply challenges.' },
+  { icon: CheckCircle2, title: 'Accountability', copy: 'Ownership of the entire supply lifecycle from quotation to fulfillment.' },
 ];
 
 export const reasons = [
   {
     icon: PackageCheck,
-    title: 'Competitive, transparent pricing',
+    title: 'Strategic Pricing',
     copy:
-      'Market-driven pricing with clear quotations and no hidden costs, designed to deliver value without budget surprises.',
+      'Market-competitive pricing with transparent cost structures, ensuring institutional value without hidden fees.',
   },
   {
     icon: Truck,
-    title: 'Prompt national delivery',
+    title: 'National Logistics',
     copy:
-      'Reliable logistics support helps organizations keep operations moving across Zambia with fewer supply interruptions.',
+      'Robust distribution network capable of delivering essential supplies to any location within Zambia.',
   },
   {
     icon: Handshake,
-    title: 'Trusted supplier partnerships',
+    title: 'Quality Partnerships',
     copy:
-      'Strong relationships with reputable manufacturers and suppliers support consistent quality and product availability.',
+      'Long-term relationships with reputable global and local manufacturers guarantee product authenticity.',
   },
   {
     icon: Headphones,
-    title: 'Responsive customer support',
+    title: 'Professional Service',
     copy:
-      'Fast quotations, clear communication, and professional follow-through from a team built around service.',
+      'Dedicated account support providing rapid response times and clear technical communication.',
   },
 ];
 
 export const portfolio = [
   {
     icon: Building2,
-    title: 'Public sector procurement',
-    copy: 'Structured supply support for administrative, hygiene, ICT, and operational requirements.',
+    title: 'Public Sector Partnerships',
+    copy: 'Supporting government institutions with reliable procurement for large-scale administrative and operational needs.',
   },
   {
     icon: BriefcaseBusiness,
-    title: 'Private institution supply',
-    copy: 'Flexible sourcing for offices, facilities, retail operations, and corporate teams.',
+    title: 'Corporate Enterprises',
+    copy: 'Tailored supply solutions for private sector organizations, from retail chains to corporate headquarters.',
   },
   {
     icon: Factory,
-    title: 'Infrastructure support',
-    copy: 'Hardware, electrical, plumbing, and industrial supplies for maintenance and project delivery.',
+    title: 'Industrial & Projects',
+    copy: 'Provisioning hardware and specialized equipment for construction, maintenance, and infrastructure developments.',
   },
 ];
 
 export const contactCards = [
-  { icon: MapPin, label: 'Office', value: company.contact.address },
-  { icon: Phone, label: 'Phone', value: `${company.contact.phonePrimary} / ${company.contact.phoneSecondary}` },
+  { icon: MapPin, label: 'Address', value: company.contact.address },
+  { icon: Phone, label: 'Telephone', value: `${company.contact.phonePrimary} / ${company.contact.phoneSecondary}` },
   { icon: Mail, label: 'Email', value: company.contact.email },
-  { icon: Timer, label: 'Response', value: 'Quotations and inquiries welcome' },
+  { icon: Timer, label: 'Availability', value: 'Professional consultation available during business hours' },
 ];

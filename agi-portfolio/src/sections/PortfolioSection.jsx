@@ -16,10 +16,10 @@ export function PortfolioSection() {
           >
             <span className="text-caption text-[rgb(var(--color-accent))]">Work Focus</span>
             <h2 className="mt-3 text-4xl font-black leading-tight text-[rgb(var(--color-ink))] sm:text-5xl">
-              Built around the environments AGI serves.
+              Strategic support for critical environments.
             </h2>
             <p className="mt-5 text-body">
-              The PDF does not list named case studies, so this portfolio area uses accurate service-context placeholders: the kinds of institutions and operational needs AGI is positioned to support.
+              We specialize in provisioning for institutional sectors that require high levels of reliability, compliance, and operational continuity.
             </p>
           </motion.div>
 

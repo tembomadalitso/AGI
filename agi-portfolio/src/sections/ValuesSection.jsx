@@ -17,8 +17,8 @@ export function ValuesSection() {
           <span className="text-caption text-[rgb(var(--color-accent))]">
             Our Foundation
           </span>
-          <h2 className="mt-3 text-4xl font-black leading-tight text-[rgb(var(--color-ink))] sm:text-5xl">
-            Values that make procurement feel predictable.
+          <h2 className="mt-3 text-4xl font-bold tracking-tight leading-tight text-[rgb(var(--color-ink))] sm:text-5xl">
+            Principles that define our standard.
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-body">
             These principles come directly from the company profile and shape how AGI communicates, sources, delivers, and supports each client.
@@ -39,15 +39,15 @@ export function ValuesSection() {
                 whileHover={{ y: -5 }}
               >
                 <motion.div
-                  className="mb-9 grid size-11 place-items-center rounded-lg bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-accent))]"
-                  whileHover={{ rotate: 4 }}
+                  className="mb-8 grid size-12 place-items-center rounded-lg bg-[rgb(var(--color-accent)/0.08)] text-[rgb(var(--color-accent))]"
+                  whileHover={{ scale: 1.05 }}
                 >
-                  <Icon size={22} strokeWidth={1.8} />
+                  <Icon size={24} strokeWidth={1.5} />
                 </motion.div>
-                <p className="mb-3 text-xs font-black uppercase text-[rgb(var(--color-subtle))]">
-                  0{index + 1}
+                <p className="mb-2 text-[11px] font-bold tracking-[0.2em] uppercase text-[rgb(var(--color-accent))]">
+                  Value 0{index + 1}
                 </p>
-                <h3 className="text-title">{value.title}</h3>
+                <h3 className="text-xl font-bold tracking-tight text-[rgb(var(--color-ink))]">{value.title}</h3>
                 <p className="mt-3 text-body-sm">
                   {value.copy}
                 </p>
