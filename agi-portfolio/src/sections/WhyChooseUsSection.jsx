@@ -18,11 +18,11 @@ export function WhyChooseUsSection() {
           <span className="text-caption text-[rgb(var(--color-accent))]">
             The AGI Difference
           </span>
-          <h2 className="mt-3 text-4xl font-black leading-tight text-[rgb(var(--color-ink))] sm:text-5xl">
-            Trust signals your procurement team can feel.
+          <h2 className="mt-3 text-4xl font-bold tracking-tight leading-tight text-[rgb(var(--color-ink))] sm:text-5xl">
+            The strategic advantage of partnership.
           </h2>
           <p className="mt-5 text-body">
-            AGI's profile highlights the essentials clients need before they commit: transparent pricing, dependable delivery, supplier quality, and responsive support.
+            Our commitment to operational excellence is built on four core pillars that ensure long-term value and trust for our institutional clients.
           </p>
         </motion.div>
 

@@ -4,30 +4,30 @@
 
 :root {
   color-scheme: light;
-  --color-canvas: 248 250 252;
-  --color-muted: 241 245 249;
+  --color-canvas: 255 255 255;
+  --color-muted: 248 250 252;
   --color-panel: 255 255 255;
   --color-panel-soft: 241 245 249;
-  --color-ink: 15 23 42;
+  --color-ink: 2 6 23;
   --color-muted-ink: 71 85 105;
   --color-subtle: 100 116 139;
-  --color-line: 226 232 240;
-  --color-accent: 13 148 136;
-  --color-accent-soft: 94 234 212;
+  --color-line: 233 236 239;
+  --color-accent: 30 64 175; /* Premium Navy Blue - McKinsey Style */
+  --color-accent-soft: 59 130 246;
 }
 
 .dark {
   color-scheme: dark;
-  --color-canvas: 4 8 18;
-  --color-muted: 9 16 31;
-  --color-panel: 13 20 35;
-  --color-panel-soft: 19 31 49;
+  --color-canvas: 2 6 23;
+  --color-muted: 15 23 42;
+  --color-panel: 15 23 42;
+  --color-panel-soft: 30 41 59;
   --color-ink: 248 250 252;
-  --color-muted-ink: 203 213 225;
-  --color-subtle: 148 163 184;
-  --color-line: 37 51 73;
-  --color-accent: 45 212 191;
-  --color-accent-soft: 153 246 228;
+  --color-muted-ink: 148 163 184;
+  --color-subtle: 100 116 139;
+  --color-line: 30 41 59;
+  --color-accent: 96 165 250;
+  --color-accent-soft: 147 197 253;
 }
 
 * {
@@ -85,25 +85,25 @@ a {
   }
 
   .text-title {
-    @apply text-xl font-black leading-tight text-[rgb(var(--color-ink))];
+    @apply text-xl font-bold leading-tight tracking-tight text-[rgb(var(--color-ink))];
   }
 
   .text-body {
-    @apply text-base leading-7 text-[rgb(var(--color-muted-ink))];
+    @apply text-[17px] leading-relaxed text-[rgb(var(--color-muted-ink))];
   }
 
   .text-body-sm {
-    @apply text-sm leading-6 text-[rgb(var(--color-muted-ink))];
+    @apply text-[15px] leading-relaxed text-[rgb(var(--color-muted-ink))];
   }
 
   .btn {
-    @apply inline-flex min-h-11 items-center justify-center rounded-lg px-5 py-3 text-sm font-black transition-all duration-300;
+    @apply inline-flex min-h-11 items-center justify-center rounded-md px-6 py-3 text-sm font-semibold transition-all duration-300;
     @apply focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-55;
     --tw-ring-offset-color: rgb(var(--color-canvas));
   }
 
   .btn-primary {
-    @apply bg-[rgb(var(--color-ink))] text-[rgb(var(--color-canvas))] shadow-lg shadow-black/10 hover:shadow-xl;
+    @apply bg-[rgb(var(--color-accent))] text-white shadow-md hover:bg-[rgb(var(--color-accent)/0.9)] hover:shadow-lg active:scale-[0.98];
     @apply focus:ring-[rgb(var(--color-accent))];
   }
 
@@ -126,12 +126,12 @@ a {
   }
 
   .card {
-    @apply rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] shadow-sm;
-    @apply transition-all duration-300;
+    @apply rounded-xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] shadow-[0_2px_4px_rgba(0,0,0,0.02),0_1px_1px_rgba(0,0,0,0.01)];
+    @apply transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)];
   }
 
   .card-hover {
-    @apply hover:border-[rgb(var(--color-accent)/0.45)] hover:shadow-xl hover:shadow-black/5;
+    @apply hover:translate-y-[-4px] hover:border-[rgb(var(--color-accent)/0.2)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.04),0_1px_1px_rgba(0,0,0,0.01)];
   }
 
   .input-field {

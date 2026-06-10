@@ -58,7 +58,7 @@ export function ContactSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              Request a quote or start a partnership conversation.
+              Start a conversation with our procurement team.
             </motion.h2>
             <motion.p
               className="text-body lg:col-start-2 lg:row-span-2 lg:row-start-1"
@@ -67,7 +67,7 @@ export function ContactSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
-              For inquiries, quotations, or partnership opportunities, use the contact details from the company profile or send a short request through the form.
+              For professional inquiries, supply quotations, or institutional partnership opportunities, reach out via our direct channels or the form below.
             </motion.p>
           </div>
 
@@ -124,7 +124,8 @@ export function ContactSection() {
                 <input
                   type="text"
                   name="name"
-                  placeholder="Name"
+                  placeholder="Full Name"
+                  aria-label="Full Name"
                   value={formData.name}
                   onChange={handleChange}
                   required
@@ -133,7 +134,8 @@ export function ContactSection() {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder="Email Address"
+                  aria-label="Email Address"
                   value={formData.email}
                   onChange={handleChange}
                   required
@@ -145,7 +147,8 @@ export function ContactSection() {
                 <input
                   type="tel"
                   name="phone"
-                  placeholder="Phone"
+                  placeholder="Phone Number"
+                  aria-label="Phone Number"
                   value={formData.phone}
                   onChange={handleChange}
                   className="input-field"
@@ -154,6 +157,7 @@ export function ContactSection() {
                   type="text"
                   name="subject"
                   placeholder="Subject"
+                  aria-label="Subject"
                   value={formData.subject}
                   onChange={handleChange}
                   required
@@ -163,7 +167,8 @@ export function ContactSection() {
 
               <textarea
                 name="message"
-                placeholder="Message"
+                placeholder="Your Message"
+                aria-label="Your Message"
                 value={formData.message}
                 onChange={handleChange}
                 required
@@ -182,7 +187,7 @@ export function ContactSection() {
                   className="w-full gap-2"
                   disabled={isSubmitted}
                 >
-                  {isSubmitted ? 'Request noted' : 'Send request'}
+                  {isSubmitted ? 'Message Sent' : 'Send Message'}
                   {!isSubmitted && <Send size={18} />}
                 </Button>
               </motion.div>

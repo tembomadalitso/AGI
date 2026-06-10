@@ -28,30 +28,30 @@ export function Navbar() {
       <div className="container-fluid max-w-7xl flex items-center justify-between py-3">
         <motion.a
           href="#home"
-          className="flex items-center gap-3"
+          className="flex items-center gap-4"
           aria-label={`${company.name} home`}
-          whileHover={{ y: -1 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ opacity: 0.9 }}
+          whileTap={{ scale: 0.98 }}
         >
-          <span className="grid size-10 place-items-center rounded-lg bg-[rgb(var(--color-ink))] text-sm font-black text-[rgb(var(--color-canvas))]">
-            AGI
-          </span>
-          <span className="hidden sm:block">
-            <span className="block text-sm font-bold leading-4 text-[rgb(var(--color-ink))]">
-              AGI Enterprise
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[rgb(var(--color-accent))] shadow-lg shadow-blue-900/20">
+            <span className="text-[15px] font-bold text-white tracking-tighter">AGI</span>
+          </div>
+          <div className="flex flex-col border-l border-[rgb(var(--color-line))] pl-4">
+            <span className="text-[15px] font-bold tracking-tight text-[rgb(var(--color-ink))] leading-none">
+              AGI ENTERPRISE
             </span>
-            <span className="block text-xs font-medium text-[rgb(var(--color-subtle))]">
+            <span className="mt-1 text-[11px] font-medium tracking-[0.2em] text-[rgb(var(--color-subtle))] leading-none uppercase">
               Limited
             </span>
-          </span>
+          </div>
         </motion.a>
 
-        <div className="hidden lg:flex items-center gap-1 rounded-full border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.7)] p-1 shadow-sm">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <motion.a
               key={link.href}
               href={link.href}
-              className="rounded-full px-4 py-2 text-sm font-semibold text-[rgb(var(--color-muted-ink))] transition-colors hover:bg-[rgb(var(--color-panel-soft))] hover:text-[rgb(var(--color-ink))]"
+              className="relative text-[14px] font-medium text-[rgb(var(--color-muted-ink))] transition-colors hover:text-[rgb(var(--color-accent))]"
               whileHover={{ y: -1 }}
             >
               {link.label}
@@ -80,7 +80,7 @@ export function Navbar() {
             size="sm"
             className="hidden sm:inline-flex gap-2"
           >
-            Request quote
+            Get in touch
             <ArrowUpRight size={16} />
           </Button>
 
