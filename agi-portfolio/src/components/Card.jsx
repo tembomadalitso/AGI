@@ -36,8 +36,8 @@ export function Card({
       className={`card card-shimmer ${hover ? 'card-hover' : ''} p-6 ${className}`}
       whileHover={hover ? { y: -6 } : {}}
       transition={{ duration: 0.28, ease: 'easeOut' }}
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: -30, y: 30 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true }}
       {...props}
     >

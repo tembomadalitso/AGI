@@ -56,7 +56,7 @@ export function Navbar() {
 
   return (
     <motion.nav
-      className={`sticky top-0 z-50 border-b border-[rgb(var(--color-line))] bg-[rgb(var(--color-canvas)/0.82)] backdrop-blur-xl transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 border-b border-[rgb(var(--color-line))] bg-[rgb(var(--color-canvas)/0.82)] backdrop-blur-xl transition-all duration-300 ${
         scrolled ? 'shadow-md shadow-black/5' : ''
       }`}
       initial={{ y: -100 }}

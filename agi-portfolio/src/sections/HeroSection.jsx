@@ -49,9 +49,10 @@ export function HeroSection() {
   const rotate = useTransform(scrollY, [0, 500], [0, 5]);
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20, filter: 'blur(10px)' },
+    hidden: { opacity: 0, x: -50, y: 50, filter: 'blur(10px)' },
     visible: {
       opacity: 1,
+      x: 0,
       y: 0,
       filter: 'blur(0px)',
       transition: { duration: 0.8, ease: [0.2, 0, 0, 1] },
