@@ -7,7 +7,7 @@ export function Footer() {
   const links = ['About', 'Services', 'Values', 'Contact'];
 
   return (
-    <footer className="bg-[#0a0f1e] py-16 text-slate-100 sm:py-20">
+    <footer className="bg-[#0a0f1e] pb-32 pt-16 text-slate-100 sm:pb-40 sm:pt-20">
       <Container>
         <div className="grid gap-16 lg:grid-cols-[1.2fr_0.8fr_1fr]">
           <motion.div
