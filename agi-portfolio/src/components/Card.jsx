@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 export function Card({
   children,
   className = '',
-  hover = true,
   icon: Icon,
   title,
   description,

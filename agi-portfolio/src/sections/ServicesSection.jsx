@@ -74,26 +74,24 @@ export function ServicesSection() {
                 <p className="mt-4 text-body">{service.summary}</p>
 
                 <AnimatePresence initial={false}>
-                  {(isExpanded || true) && (
-                    <motion.ul
-                      className="mt-auto space-y-3 pt-8"
-                      initial={false}
-                      animate={isExpanded ? { opacity: 1, height: 'auto' } : { opacity: 0.55, height: 'auto' }}
-                    >
-                      {service.items.map((item, i) => (
-                        <motion.li
-                          key={item}
-                          className="flex gap-3 text-sm font-semibold text-[rgb(var(--color-muted-ink))]"
-                          initial={{ opacity: 0, x: -8 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: isExpanded ? i * 0.06 : 0 }}
-                        >
-                          <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[rgb(var(--color-accent))]" />
-                          {item}
-                        </motion.li>
-                      ))}
-                    </motion.ul>
-                  )}
+                  <motion.ul
+                    className="mt-auto space-y-3 pt-8"
+                    initial={false}
+                    animate={isExpanded ? { opacity: 1, height: 'auto' } : { opacity: 0.55, height: 'auto' }}
+                  >
+                    {service.items.map((item, i) => (
+                      <motion.li
+                        key={item}
+                        className="flex gap-3 text-sm font-semibold text-[rgb(var(--color-muted-ink))]"
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: isExpanded ? i * 0.06 : 0 }}
+                      >
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[rgb(var(--color-accent))]" />
+                        {item}
+                      </motion.li>
+                    ))}
+                  </motion.ul>
                 </AnimatePresence>
 
                 <AnimatePresence>

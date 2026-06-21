@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Section } from '../components/Section';
 import { Container } from '../components/Container';
 import { values } from '../utils/content';
@@ -60,10 +60,10 @@ export function ValuesSection() {
         </div>
 
         {/* Mobile: horizontal scroll strip */}
-        <div className="md:hidden relative -mx-4 px-4 overflow-hidden">
+        <div className="md:hidden relative -mx-4 px-4">
           <div
             ref={trackRef}
-            className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar"
+            className="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {values.map((value, index) => {
@@ -71,7 +71,7 @@ export function ValuesSection() {
               return (
                 <motion.div
                   key={index}
-                  className="min-w-[85vw] snap-center rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] p-8 text-left shadow-lg shrink-0"
+                  className="w-[calc(100vw-4rem)] snap-center rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] p-6 text-left shadow-lg shrink-0"
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, root: trackRef }}

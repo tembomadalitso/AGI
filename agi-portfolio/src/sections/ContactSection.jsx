@@ -8,7 +8,7 @@ import { company, contactCards } from '../utils/content';
 
 const MAX_MESSAGE = 500;
 
-function FloatingField({ label, id, error, children }) {
+function FloatingField({ error, children }) {
   return (
     <div className="relative">
       {children}

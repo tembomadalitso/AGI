@@ -8,20 +8,18 @@ import heroArt from '../assets/hero.png';
 import { company, stats } from '../utils/content';
 
 function CountUp({ end, duration = 1600 }) {
-  const [display, setDisplay] = useState('0');
+  const numeric = parseFloat(end.replace(/[^0-9.]/g, ''));
+  const suffix = end.replace(/[0-9.]/g, '');
+  const [display, setDisplay] = useState(() => isNaN(numeric) ? end : '0');
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
 
   useEffect(() => {
-    if (!inView) return;
-    // Check if value is numeric (strip non-digits for counting)
-    const numeric = parseFloat(end.replace(/[^0-9.]/g, ''));
-    const suffix = end.replace(/[0-9.]/g, '');
-    if (isNaN(numeric)) { setDisplay(end); return; }
+    if (!inView || isNaN(numeric)) return;
 
     // Respect prefers-reduced-motion
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setDisplay(end);
+      setTimeout(() => setDisplay(end), 0);
       return;
     }
 
@@ -38,7 +36,7 @@ function CountUp({ end, duration = 1600 }) {
       }
     }, 16);
     return () => clearInterval(timer);
-  }, [inView, end, duration]);
+  }, [inView, end, duration, numeric, suffix]);
 
   return <span ref={ref}>{display}</span>;
 }
@@ -140,17 +138,17 @@ export function HeroSection() {
 
           <motion.div variants={itemVariants} className="relative" style={{ y: y1, rotate }}>
             <div className="absolute -inset-10 rounded-[2rem] bg-[rgb(var(--color-accent)/0.15)] blur-[100px]" />
-            <div className="relative overflow-hidden rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.6)] p-4 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-              <div className="rounded-lg bg-[rgb(var(--color-ink))] p-5 text-[rgb(var(--color-canvas))]">
-                <div className="flex items-center justify-between border-b border-white/10 pb-5">
+            <div className="relative overflow-hidden rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.6)] p-3 shadow-2xl shadow-black/20 backdrop-blur-2xl sm:p-4">
+              <div className="rounded-lg bg-[rgb(var(--color-ink))] p-4 text-[rgb(var(--color-canvas))] sm:p-6">
+                <div className="flex items-center justify-between border-b border-white/10 pb-4 sm:pb-5">
                   <div>
-                    <p className="text-xs font-bold uppercase text-white/45">Enterprise supply desk</p>
-                    <p className="mt-2 text-2xl font-black">{company.shortName} procurement</p>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-white/45 sm:text-xs">Enterprise supply desk</p>
+                    <p className="mt-1 text-xl font-black sm:mt-2 sm:text-2xl">{company.shortName} procurement</p>
                   </div>
-                  <img src={heroArt} alt="" className="h-16 w-16 object-contain" />
+                  <img src={heroArt} alt="" className="h-12 w-12 object-contain sm:h-16 sm:w-16" />
                 </div>
 
-                <div className="mt-6 grid gap-3">
+                <div className="mt-5 grid gap-2 sm:mt-6 sm:gap-3">
                   {[
                     { icon: ShieldCheck, label: 'Transparent pricing', value: 'Clear quotations' },
                     { icon: Truck, label: 'Delivery network', value: 'Across Zambia' },
@@ -160,33 +158,33 @@ export function HeroSection() {
                     return (
                       <motion.div
                         key={item.label}
-                        className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.04] p-4"
+                        className="flex flex-col gap-1 rounded-lg border border-white/10 bg-white/[0.04] p-3 sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:p-4"
                         initial={{ opacity: 0, x: 18 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.45 + index * 0.12 }}
                         whileHover={{ backgroundColor: 'rgba(255,255,255,0.07)', x: 2 }}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="grid size-10 place-items-center rounded-lg bg-white/10 text-[rgb(var(--color-accent-soft))]">
-                            <Icon size={20} />
+                          <span className="grid size-8 place-items-center rounded-lg bg-white/10 text-[rgb(var(--color-accent-soft))] sm:size-10">
+                            <Icon size={18} />
                           </span>
-                          <span className="text-sm font-bold">{item.label}</span>
+                          <span className="text-xs font-bold sm:text-sm">{item.label}</span>
                         </div>
-                        <span className="text-sm text-white/55">{item.value}</span>
+                        <span className="pl-11 text-[11px] font-medium text-white/55 sm:pl-0 sm:text-sm">{item.value}</span>
                       </motion.div>
                     );
                   })}
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-4">
-                <div className="rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel-soft))] p-4">
-                  <p className="text-xs font-bold uppercase text-[rgb(var(--color-subtle))]">Coverage</p>
-                  <p className="mt-2 text-lg font-black text-[rgb(var(--color-ink))]">Public & private sector</p>
+              <div className="mt-3 grid grid-cols-2 gap-3 sm:mt-4 sm:gap-4">
+                <div className="rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel-soft))] p-3 sm:p-4">
+                  <p className="text-[10px] font-bold uppercase text-[rgb(var(--color-subtle))] sm:text-xs">Coverage</p>
+                  <p className="mt-1 text-sm font-black text-[rgb(var(--color-ink))] sm:mt-2 sm:text-lg">Public & private sector</p>
                 </div>
-                <div className="rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel-soft))] p-4">
-                  <p className="text-xs font-bold uppercase text-[rgb(var(--color-subtle))]">Focus</p>
-                  <p className="mt-2 text-lg font-black text-[rgb(var(--color-ink))]">Quality goods & services</p>
+                <div className="rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel-soft))] p-3 sm:p-4">
+                  <p className="text-[10px] font-bold uppercase text-[rgb(var(--color-subtle))] sm:text-xs">Focus</p>
+                  <p className="mt-1 text-sm font-black text-[rgb(var(--color-ink))] sm:mt-2 sm:text-lg">Quality goods & services</p>
                 </div>
               </div>
             </div>
