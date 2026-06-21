@@ -2,5 +2,5 @@ name = "agi"
 compatibility_date = "2025-02-21"
 
 [assets]
-directory = "./dist"
+directory = "agi-portfolio/dist"
 not_found_handling = "single-page-application"
