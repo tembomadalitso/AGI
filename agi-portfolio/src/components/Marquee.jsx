@@ -1,38 +1,33 @@
 import { motion } from 'framer-motion';
 
-export function Marquee({ items, speed = 40, reverse = false, className = "" }) {
-  // To create a seamless loop, we repeat the items
-  const duplicatedItems = [...items, ...items, ...items, ...items];
+/**
+ * Continuous marquee for social proof/products
+ */
+export function Marquee({ items, speed = 50, className = "" }) {
+  // Duplicate items for a seamless loop
+  const displayItems = [...items, ...items, ...items];
 
   return (
-    <div className={`relative flex overflow-hidden py-4 ${className}`}>
+    <div className={`flex overflow-hidden whitespace-nowrap py-4 ${className}`}>
       <motion.div
-        className="flex whitespace-nowrap"
-        animate={{
-          x: reverse ? ["-50%", "0%"] : ["0%", "-50%"],
-        }}
+        className="flex shrink-0 items-center gap-12 px-6"
+        animate={{ x: [0, "-33.33%"] }}
         transition={{
           duration: speed,
           repeat: Infinity,
           ease: "linear",
         }}
       >
-        {duplicatedItems.map((item, index) => (
-          <div
-            key={index}
-            className="flex items-center mx-8"
+        {displayItems.map((item, idx) => (
+          <span
+            key={idx}
+            className="flex items-center gap-4 text-sm font-black uppercase tracking-[0.2em] text-[rgb(var(--color-ink))]"
           >
-            <span className="text-sm md:text-base font-bold uppercase tracking-widest text-[rgb(var(--color-muted-ink))] opacity-60">
-              {item}
-            </span>
-            <span className="ml-16 size-2 rounded-full bg-[rgb(var(--color-accent))] opacity-30" />
-          </div>
+            <span className="size-2 rounded-full bg-[rgb(var(--color-accent))]" />
+            {item}
+          </span>
         ))}
       </motion.div>
-
-      {/* Fades on the edges for a premium look */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[rgb(var(--color-canvas))] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[rgb(var(--color-canvas))] to-transparent" />
     </div>
   );
 }

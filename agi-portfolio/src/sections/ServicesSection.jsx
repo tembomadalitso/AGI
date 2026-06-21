@@ -9,7 +9,7 @@ export function ServicesSection() {
   const [expanded, setExpanded] = useState(null);
 
   return (
-    <Section id="services" background="muted">
+    <Section id="services">
       <Container>
         <motion.div
           className="mb-12 grid gap-6 lg:grid-cols-[0.82fr_1fr] lg:items-end"
@@ -37,13 +37,12 @@ export function ServicesSection() {
             return (
               <motion.article
                 key={index}
-                className="group card-shimmer flex flex-col rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] p-8 shadow-sm transition-all hover:border-[rgb(var(--color-accent)/0.45)] cursor-pointer"
+                className="group glass glass-magnify card-shimmer flex flex-col rounded-2xl p-8 cursor-pointer"
                 style={{ minHeight: isExpanded ? 'auto' : '360px' }}
                 initial={{ opacity: 0, y: 22 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05, duration: 0.5 }}
-                whileHover={!isExpanded ? { y: -12, scale: 1.02 } : {}}
                 onClick={() => setExpanded(isExpanded ? null : index)}
                 role="button"
                 aria-expanded={isExpanded}
@@ -51,7 +50,7 @@ export function ServicesSection() {
                 onKeyDown={(e) => e.key === 'Enter' && setExpanded(isExpanded ? null : index)}
               >
                 <div className="mb-7 flex items-start justify-between gap-4">
-                  <div className="grid size-12 place-items-center rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-accent))]">
+                  <div className="grid size-12 place-items-center rounded-lg border border-[rgb(var(--color-line)/0.3)] bg-[rgb(var(--color-panel-soft)/0.5)] text-[rgb(var(--color-accent))] backdrop-blur-sm">
                     <service.icon size={23} strokeWidth={1.8} />
                   </div>
                   <div className="flex items-center gap-2">
@@ -74,7 +73,6 @@ export function ServicesSection() {
                 </h3>
                 <p className="mt-4 text-body">{service.summary}</p>
 
-                {/* Items: always visible on desktop, expandable on mobile via click */}
                 <AnimatePresence initial={false}>
                   {(isExpanded || true) && (
                     <motion.ul
@@ -98,7 +96,6 @@ export function ServicesSection() {
                   )}
                 </AnimatePresence>
 
-                {/* Expanded accent bar */}
                 <AnimatePresence>
                   {isExpanded && (
                     <motion.div

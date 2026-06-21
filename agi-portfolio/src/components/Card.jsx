@@ -13,7 +13,7 @@ export function Card({
     <div className="flex flex-col h-full">
       {Icon && (
         <motion.div
-          className="mb-5 flex size-11 items-center justify-center rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-accent))]"
+          className="mb-5 flex size-11 items-center justify-center rounded-lg border border-[rgb(var(--color-line)/0.4)] bg-[rgb(var(--color-panel-soft)/0.5)] text-[rgb(var(--color-accent))] backdrop-blur-sm"
           initial={{ scale: 0.8, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.1 }}
@@ -33,8 +33,7 @@ export function Card({
 
   return (
     <motion.div
-      className={`card card-shimmer ${hover ? 'card-hover' : ''} p-6 ${className}`}
-      whileHover={hover ? { y: -6 } : {}}
+      className={`glass glass-magnify card-shimmer rounded-2xl p-7 ${className}`}
       transition={{ duration: 0.28, ease: 'easeOut' }}
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
