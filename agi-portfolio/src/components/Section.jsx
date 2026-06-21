@@ -12,6 +12,12 @@ export function Section({
     md: 'section-spacing',
   };
 
+  const backgrounds = {
+    default: '',
+    gradient: 'hero-surface',
+    muted: 'bg-[rgb(var(--color-panel-soft)/0.3)]',
+  };
+
   // We now use a uniform background pattern for all sections
   return (
     <motion.section
