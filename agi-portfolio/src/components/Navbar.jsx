@@ -66,20 +66,20 @@ export function Navbar() {
       <div className="container-fluid max-w-7xl flex items-center justify-between py-3">
         <motion.a
           href="#home"
-          className="flex items-center gap-4"
+          className="flex items-center gap-3 md:gap-4"
           aria-label={`${company.name} home`}
           whileHover={{ y: -1 }}
           whileTap={{ scale: 0.95 }}
           onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[rgb(var(--color-accent))] shadow-lg shadow-blue-900/20">
-            <span className="text-[15px] font-bold text-white tracking-tighter">AGI</span>
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[rgb(var(--color-accent))] shadow-lg shadow-blue-900/20">
+            <span className="text-[15px] font-black text-white tracking-tighter">AGI</span>
           </div>
-          <div className="flex flex-col border-l border-[rgb(var(--color-line))] pl-4">
-            <span className="text-[15px] font-bold tracking-tight text-[rgb(var(--color-ink))] leading-none">
+          <div className="flex flex-col border-l border-[rgb(var(--color-line))] pl-3 md:pl-4">
+            <span className="text-[14px] md:text-[15px] font-bold tracking-tight text-[rgb(var(--color-ink))] leading-none">
               AGI ENTERPRISE
             </span>
-            <span className="mt-1 text-[11px] font-medium tracking-[0.2em] text-[rgb(var(--color-subtle))] leading-none uppercase">
+            <span className="mt-1 text-[10px] md:text-[11px] font-medium tracking-[0.2em] text-[rgb(var(--color-subtle))] leading-none uppercase">
               Limited
             </span>
           </div>
