@@ -18,6 +18,7 @@ export function Card({
           whileInView={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.1 }}
           viewport={{ once: true }}
+          whileHover={{ rotate: 5, scale: 1.1 }}
         >
           <Icon size={22} strokeWidth={1.8} />
         </motion.div>
@@ -32,7 +33,7 @@ export function Card({
 
   return (
     <motion.div
-      className={`card ${hover ? 'card-hover' : ''} p-6 ${className}`}
+      className={`card card-shimmer ${hover ? 'card-hover' : ''} p-6 ${className}`}
       whileHover={hover ? { y: -6 } : {}}
       transition={{ duration: 0.28, ease: 'easeOut' }}
       initial={{ opacity: 0, y: 18 }}

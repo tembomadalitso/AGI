@@ -1,10 +1,47 @@
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Truck } from 'lucide-react';
 import { Section } from '../components/Section';
 import { Container } from '../components/Container';
 import { Button } from '../components/Button';
 import heroArt from '../assets/hero.png';
 import { company, stats } from '../utils/content';
+
+function CountUp({ end, duration = 1600 }) {
+  const [display, setDisplay] = useState('0');
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true });
+
+  useEffect(() => {
+    if (!inView) return;
+    // Check if value is numeric (strip non-digits for counting)
+    const numeric = parseFloat(end.replace(/[^0-9.]/g, ''));
+    const suffix = end.replace(/[0-9.]/g, '');
+    if (isNaN(numeric)) { setDisplay(end); return; }
+
+    // Respect prefers-reduced-motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplay(end);
+      return;
+    }
+
+    let start = 0;
+    const increment = numeric / (duration / 16);
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= numeric) {
+        clearInterval(timer);
+        setDisplay(end);
+      } else {
+        const isInt = !end.includes('.');
+        setDisplay((isInt ? Math.floor(start) : start.toFixed(1)) + suffix);
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [inView, end, duration]);
+
+  return <span ref={ref}>{display}</span>;
+}
 
 export function HeroSection() {
   const itemVariants = {
@@ -28,7 +65,12 @@ export function HeroSection() {
         >
           <div>
             <motion.div variants={itemVariants} className="mb-6 inline-flex items-center gap-2 rounded-full border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.74)] px-3 py-2 shadow-sm backdrop-blur">
-              <Sparkles size={15} className="text-[rgb(var(--color-accent))]" />
+              <motion.span
+                animate={{ rotate: [0, 15, -10, 0] }}
+                transition={{ delay: 1.2, duration: 0.6, ease: 'easeInOut' }}
+              >
+                <Sparkles size={15} className="text-[rgb(var(--color-accent))]" />
+              </motion.span>
               <span className="text-xs font-bold uppercase text-[rgb(var(--color-muted-ink))]">
                 Company Profile 2026
               </span>
@@ -67,13 +109,16 @@ export function HeroSection() {
               </Button>
             </motion.div>
 
+            {/* Stats with count-up */}
             <motion.div
               variants={itemVariants}
               className="mt-10 grid max-w-2xl grid-cols-3 divide-x divide-[rgb(var(--color-line))] rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.72)] p-3 shadow-sm backdrop-blur"
             >
               {stats.map((stat) => (
                 <div key={stat.label} className="px-3 py-2">
-                  <p className="text-2xl font-black text-[rgb(var(--color-ink))]">{stat.value}</p>
+                  <p className="text-2xl font-black text-[rgb(var(--color-ink))]">
+                    <CountUp end={stat.value} />
+                  </p>
                   <p className="mt-1 text-xs font-semibold uppercase leading-4 text-[rgb(var(--color-subtle))]">
                     {stat.label}
                   </p>
@@ -108,6 +153,7 @@ export function HeroSection() {
                         initial={{ opacity: 0, x: 18 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.45 + index * 0.12 }}
+                        whileHover={{ backgroundColor: 'rgba(255,255,255,0.07)', x: 2 }}
                       >
                         <div className="flex items-center gap-3">
                           <span className="grid size-10 place-items-center rounded-lg bg-white/10 text-[rgb(var(--color-accent-soft))]">

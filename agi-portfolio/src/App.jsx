@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { Navbar, Footer } from './components';
 import { HomePage } from './pages/HomePage';
+import { ScrollToTop } from './components/ScrollToTop';
 import './index.css';
 
 export default function App() {
@@ -14,6 +15,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
           </Routes>
           <Footer />
+          <ScrollToTop />
         </div>
       </BrowserRouter>
     </ThemeProvider>

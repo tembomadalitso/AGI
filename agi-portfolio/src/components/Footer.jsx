@@ -7,7 +7,7 @@ export function Footer() {
   const links = ['About', 'Services', 'Values', 'Contact'];
 
   return (
-    <footer className="bg-[rgb(var(--color-ink))] py-16 text-[rgb(var(--color-canvas))] sm:py-20">
+    <footer className="bg-[#0a0f1e] py-16 text-slate-100 sm:py-20">
       <Container>
         <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr_1fr]">
           <motion.div
@@ -15,7 +15,7 @@ export function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="mb-5 inline-flex size-12 items-center justify-center rounded-lg bg-[rgb(var(--color-canvas))] text-sm font-black text-[rgb(var(--color-ink))]">
+            <div className="mb-5 inline-flex size-12 items-center justify-center rounded-lg bg-white/10 text-sm font-black text-white">
               AGI
             </div>
             <h3 className="mb-4 max-w-sm text-3xl font-black leading-tight sm:text-4xl">

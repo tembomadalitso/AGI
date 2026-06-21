@@ -1,9 +1,12 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Section } from '../components/Section';
 import { Container } from '../components/Container';
 import { values } from '../utils/content';
 
 export function ValuesSection() {
+  const trackRef = useRef(null);
+
   return (
     <Section id="values" background="default">
       <Container>
@@ -25,7 +28,8 @@ export function ValuesSection() {
           </p>
         </motion.div>
 
-        <div className="grid gap-4 md:grid-cols-5">
+        {/* Desktop: 5-col grid */}
+        <div className="hidden md:grid gap-4 md:grid-cols-5">
           {values.map((value, index) => {
             const Icon = value.icon;
             return (
@@ -36,11 +40,12 @@ export function ValuesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -5, borderColor: 'rgb(var(--color-accent) / 0.4)' }}
               >
                 <motion.div
                   className="mb-9 grid size-11 place-items-center rounded-lg bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-accent))]"
-                  whileHover={{ rotate: 4 }}
+                  whileHover={{ rotate: 6, scale: 1.1 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 15 }}
                 >
                   <Icon size={22} strokeWidth={1.8} />
                 </motion.div>
@@ -48,12 +53,51 @@ export function ValuesSection() {
                   0{index + 1}
                 </p>
                 <h3 className="text-title">{value.title}</h3>
-                <p className="mt-3 text-body-sm">
-                  {value.copy}
-                </p>
+                <p className="mt-3 text-body-sm">{value.copy}</p>
               </motion.div>
             );
           })}
+        </div>
+
+        {/* Mobile: horizontal scroll strip */}
+        <div className="md:hidden">
+          <div
+            ref={trackRef}
+            className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {values.map((value, index) => {
+              const Icon = value.icon;
+              return (
+                <motion.div
+                  key={index}
+                  className="min-w-[260px] snap-start rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] p-5 text-left shadow-sm shrink-0"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, root: trackRef }}
+                  transition={{ delay: index * 0.08 }}
+                >
+                  <div className="mb-6 grid size-11 place-items-center rounded-lg bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-accent))]">
+                    <Icon size={22} strokeWidth={1.8} />
+                  </div>
+                  <p className="mb-3 text-xs font-black uppercase text-[rgb(var(--color-subtle))]">
+                    0{index + 1}
+                  </p>
+                  <h3 className="text-title">{value.title}</h3>
+                  <p className="mt-3 text-body-sm">{value.copy}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+          {/* Scroll hint dots */}
+          <div className="mt-3 flex justify-center gap-1.5">
+            {values.map((_, i) => (
+              <span
+                key={i}
+                className="size-1.5 rounded-full bg-[rgb(var(--color-line))]"
+              />
+            ))}
+          </div>
         </div>
       </Container>
     </Section>
