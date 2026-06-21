@@ -12,16 +12,11 @@ export function Section({
     md: 'section-spacing',
   };
 
-  const backgrounds = {
-    default: 'bg-[rgb(var(--color-canvas))]',
-    muted: 'bg-[rgb(var(--color-muted))]',
-    gradient: 'hero-surface',
-  };
-
+  // We now use a uniform background pattern for all sections
   return (
     <motion.section
       id={id}
-      className={`relative ${sizes[size]} ${backgrounds[background]} transition-colors duration-500 ${className}`}
+      className={`relative ${sizes[size]} bg-pattern-global transition-colors duration-500 ${className}`}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: '-100px' }}

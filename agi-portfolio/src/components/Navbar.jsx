@@ -48,7 +48,6 @@ export function Navbar() {
 
   const handleNavClick = (href) => {
     setIsOpen(false);
-    // Small delay so mobile menu closes before scroll
     setTimeout(() => {
       document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
     }, 150);
@@ -56,8 +55,8 @@ export function Navbar() {
 
   return (
     <motion.nav
-      className={`sticky top-0 z-50 border-b border-[rgb(var(--color-line))] bg-[rgb(var(--color-canvas)/0.82)] backdrop-blur-xl transition-all duration-300 ${
-        scrolled ? 'shadow-md shadow-black/5' : ''
+      className={`sticky top-0 z-50 border-b border-[rgb(var(--color-line)/0.3)] bg-[rgb(var(--color-canvas)/0.75)] backdrop-blur-2xl transition-all duration-300 ${
+        scrolled ? 'shadow-xl shadow-black/5' : ''
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -75,7 +74,7 @@ export function Navbar() {
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[rgb(var(--color-accent))] shadow-lg shadow-blue-900/20">
             <span className="text-[15px] font-black text-white tracking-tighter">AGI</span>
           </div>
-          <div className="flex flex-col border-l border-[rgb(var(--color-line))] pl-3 md:pl-4">
+          <div className="flex flex-col border-l border-[rgb(var(--color-line)/0.5)] pl-3 md:pl-4">
             <span className="text-[14px] md:text-[15px] font-bold tracking-tight text-[rgb(var(--color-ink))] leading-none">
               AGI ENTERPRISE
             </span>
@@ -86,7 +85,7 @@ export function Navbar() {
         </motion.a>
 
         {/* Desktop nav pill */}
-        <div className="hidden lg:flex items-center gap-1 rounded-full border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.7)] p-1 shadow-sm">
+        <div className="hidden lg:flex items-center gap-1 rounded-full border border-[rgb(var(--color-line)/0.4)] bg-[rgb(var(--color-panel)/0.4)] p-1 backdrop-blur-md">
           {navLinks.map((link) => {
             const isActive = activeSection === link.href.slice(1);
             return (
@@ -94,21 +93,29 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                className="relative rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200"
+                className="group relative rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300"
                 style={{
                   color: isActive
-                    ? 'rgb(var(--color-ink))'
+                    ? '#fff'
                     : 'rgb(var(--color-muted-ink))',
                 }}
               >
                 {isActive && (
                   <motion.span
                     layoutId="nav-pill"
-                    className="absolute inset-0 rounded-full bg-[rgb(var(--color-panel-soft))]"
-                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    className="absolute inset-0 rounded-full bg-slate-950 shadow-lg"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10">{link.label}</span>
+
+                {/* Magnifying Glass Hover Effect */}
+                {!isActive && (
+                  <span className="absolute inset-0 rounded-full border border-[rgb(var(--color-accent)/0.5)] opacity-0 scale-90 blur-sm transition-all duration-300 group-hover:opacity-100 group-hover:scale-105 group-hover:blur-0" />
+                )}
+
+                <span className="relative z-10 transition-transform duration-300 group-hover:scale-110 inline-block">
+                  {link.label}
+                </span>
               </a>
             );
           })}
@@ -117,7 +124,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <motion.button
             onClick={toggleTheme}
-            className="grid size-10 place-items-center rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] text-[rgb(var(--color-muted-ink))] shadow-sm transition-colors hover:text-[rgb(var(--color-ink))]"
+            className="grid size-10 place-items-center rounded-lg border border-[rgb(var(--color-line)/0.4)] bg-[rgb(var(--color-panel)/0.5)] text-[rgb(var(--color-muted-ink))] backdrop-blur-md shadow-sm transition-all hover:text-[rgb(var(--color-ink))] hover:scale-110"
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.9, rotate: 15 }}
             aria-label="Toggle theme"
@@ -139,7 +146,7 @@ export function Navbar() {
             as="a"
             href="#contact"
             size="sm"
-            className="hidden sm:inline-flex gap-2"
+            className="hidden sm:inline-flex gap-2 glass-magnify"
             onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
           >
             Get in touch
@@ -147,7 +154,7 @@ export function Navbar() {
           </Button>
 
           <motion.button
-            className="grid size-10 place-items-center rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] lg:hidden"
+            className="grid size-10 place-items-center rounded-lg border border-[rgb(var(--color-line)/0.4)] bg-[rgb(var(--color-panel)/0.5)] lg:hidden backdrop-blur-md"
             onClick={() => setIsOpen(!isOpen)}
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.95 }}
@@ -173,7 +180,7 @@ export function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="border-t border-[rgb(var(--color-line))] bg-[rgb(var(--color-canvas))] lg:hidden"
+            className="border-t border-[rgb(var(--color-line)/0.2)] bg-[rgb(var(--color-canvas)/0.95)] backdrop-blur-3xl lg:hidden"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -186,10 +193,10 @@ export function Navbar() {
                   <motion.a
                     key={link.href}
                     href={link.href}
-                    className={`rounded-lg px-4 py-3 text-sm font-semibold transition-colors ${
+                    className={`rounded-lg px-4 py-3 text-sm font-semibold transition-all ${
                       isActive
-                        ? 'bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-ink))]'
-                        : 'text-[rgb(var(--color-muted-ink))] hover:bg-[rgb(var(--color-panel-soft))] hover:text-[rgb(var(--color-ink))]'
+                        ? 'bg-slate-950 text-white shadow-lg'
+                        : 'text-[rgb(var(--color-muted-ink))] hover:bg-[rgb(var(--color-panel-soft)/0.5)] hover:text-[rgb(var(--color-ink))]'
                     }`}
                     initial={{ opacity: 0, x: -12 }}
                     animate={{ opacity: 1, x: 0 }}
