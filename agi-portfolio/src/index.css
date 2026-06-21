@@ -18,14 +18,14 @@
 
 .dark {
   color-scheme: dark;
-  --color-canvas: 2 6 23;
-  --color-muted: 15 23 42;
-  --color-panel: 15 23 42;
-  --color-panel-soft: 30 41 59;
-  --color-ink: 248 250 252;
-  --color-muted-ink: 148 163 184;
-  --color-subtle: 100 116 139;
-  --color-line: 30 41 59;
+  --color-canvas: 3 7 18; /* Richer black */
+  --color-muted: 9 12 23;
+  --color-panel: 13 18 30; /* Deep navy slate */
+  --color-panel-soft: 23 32 50;
+  --color-ink: 243 244 246; /* Softer white */
+  --color-muted-ink: 156 163 175;
+  --color-subtle: 107 114 128;
+  --color-line: 31 41 55;
   --color-accent: 96 165 250;
   --color-accent-soft: 147 197 253;
 }
@@ -90,10 +90,12 @@ a {
 
   .text-body {
     @apply text-[17px] leading-relaxed text-[rgb(var(--color-muted-ink))];
+    text-wrap: balance;
   }
 
   .text-body-sm {
     @apply text-[15px] leading-relaxed text-[rgb(var(--color-muted-ink))];
+    text-wrap: balance;
   }
 
   .btn {
@@ -128,10 +130,11 @@ a {
   .card {
     @apply rounded-xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] shadow-[0_2px_4px_rgba(0,0,0,0.02),0_1px_1px_rgba(0,0,0,0.01)];
     @apply transition-all duration-500 ease-[cubic-bezier(0.2,0,0,1)];
+    isolation: isolate;
   }
 
   .card-hover {
-    @apply hover:translate-y-[-4px] hover:border-[rgb(var(--color-accent)/0.2)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.04),0_1px_1px_rgba(0,0,0,0.01)];
+    @apply hover:translate-y-[-8px] hover:border-[rgb(var(--color-accent)/0.4)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.1),0_1px_1px_rgba(0,0,0,0.05)];
   }
 
   .input-field {

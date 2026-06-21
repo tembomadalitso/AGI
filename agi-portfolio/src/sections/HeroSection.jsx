@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, CheckCircle2, ShieldCheck, Sparkles, Truck } from 'lucide-react';
 import { Section } from '../components/Section';
 import { Container } from '../components/Container';
@@ -44,12 +44,17 @@ function CountUp({ end, duration = 1600 }) {
 }
 
 export function HeroSection() {
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 100]);
+  const rotate = useTransform(scrollY, [0, 500], [0, 5]);
+
   const itemVariants = {
-    hidden: { opacity: 0, y: 12 },
+    hidden: { opacity: 0, y: 20, filter: 'blur(10px)' },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] },
+      filter: 'blur(0px)',
+      transition: { duration: 0.8, ease: [0.2, 0, 0, 1] },
     },
   };
 
@@ -78,7 +83,7 @@ export function HeroSection() {
 
             <motion.h1
               variants={itemVariants}
-              className="max-w-4xl text-5xl font-bold tracking-tight leading-[1.05] text-[rgb(var(--color-ink))] sm:text-6xl lg:text-7xl"
+              className="max-w-4xl text-4xl font-bold tracking-tight leading-[1.1] text-[rgb(var(--color-ink))] sm:text-6xl lg:text-7xl"
             >
               {company.heroTitle}
             </motion.h1>
@@ -117,14 +122,14 @@ export function HeroSection() {
             {/* Stats with count-up */}
             <motion.div
               variants={itemVariants}
-              className="mt-10 grid max-w-2xl grid-cols-3 divide-x divide-[rgb(var(--color-line))] rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.72)] p-3 shadow-sm backdrop-blur"
+              className="mt-10 flex max-w-2xl flex-wrap gap-4 rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.5)] p-2 shadow-sm backdrop-blur-md"
             >
               {stats.map((stat) => (
-                <div key={stat.label} className="px-3 py-2">
-                  <p className="text-2xl font-black text-[rgb(var(--color-ink))]">
+                <div key={stat.label} className="flex-1 min-w-[120px] rounded-xl bg-[rgb(var(--color-canvas)/0.5)] p-4 border border-[rgb(var(--color-line)/0.5)] transition-all hover:bg-[rgb(var(--color-panel-soft))] group">
+                  <p className="text-3xl font-black text-[rgb(var(--color-ink))] group-hover:text-[rgb(var(--color-accent))] transition-colors">
                     <CountUp end={stat.value} />
                   </p>
-                  <p className="mt-1 text-xs font-semibold uppercase leading-4 text-[rgb(var(--color-subtle))]">
+                  <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--color-subtle))]">
                     {stat.label}
                   </p>
                 </div>
@@ -132,9 +137,9 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          <motion.div variants={itemVariants} className="relative">
-            <div className="absolute -inset-6 rounded-[2rem] bg-[rgb(var(--color-accent)/0.08)] blur-3xl" />
-            <div className="relative overflow-hidden rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.82)] p-4 shadow-2xl shadow-black/10 backdrop-blur-xl">
+          <motion.div variants={itemVariants} className="relative" style={{ y: y1, rotate }}>
+            <div className="absolute -inset-10 rounded-[2rem] bg-[rgb(var(--color-accent)/0.15)] blur-[100px]" />
+            <div className="relative overflow-hidden rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.6)] p-4 shadow-2xl shadow-black/20 backdrop-blur-2xl">
               <div className="rounded-lg bg-[rgb(var(--color-ink))] p-5 text-[rgb(var(--color-canvas))]">
                 <div className="flex items-center justify-between border-b border-white/10 pb-5">
                   <div>

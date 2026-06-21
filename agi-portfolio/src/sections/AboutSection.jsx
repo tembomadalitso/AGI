@@ -42,7 +42,7 @@ export function AboutSection() {
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }}
           >
-            <p className="text-2xl font-semibold leading-10 text-[rgb(var(--color-ink))]">
+            <p className="text-xl md:text-2xl font-semibold leading-relaxed md:leading-10 text-[rgb(var(--color-ink))]">
               {company.description}
             </p>
 

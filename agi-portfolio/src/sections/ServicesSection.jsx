@@ -37,13 +37,13 @@ export function ServicesSection() {
             return (
               <motion.article
                 key={index}
-                className="group flex flex-col rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] p-6 shadow-sm transition-colors hover:border-[rgb(var(--color-accent)/0.45)] cursor-pointer"
-                style={{ minHeight: isExpanded ? 'auto' : '330px' }}
+                className="group card-shimmer flex flex-col rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] p-8 shadow-sm transition-all hover:border-[rgb(var(--color-accent)/0.45)] cursor-pointer"
+                style={{ minHeight: isExpanded ? 'auto' : '360px' }}
                 initial={{ opacity: 0, y: 22 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05, duration: 0.5 }}
-                whileHover={!isExpanded ? { y: -6 } : {}}
+                whileHover={!isExpanded ? { y: -12, scale: 1.02 } : {}}
                 onClick={() => setExpanded(isExpanded ? null : index)}
                 role="button"
                 aria-expanded={isExpanded}
