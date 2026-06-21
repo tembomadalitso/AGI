@@ -21,6 +21,18 @@ export function Navbar() {
   const { isDark, toggleTheme } = useTheme();
   const observerRef = useRef(null);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   // Track scroll for shadow
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -176,39 +188,88 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Drawer */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            className="border-t border-[rgb(var(--color-line)/0.2)] bg-[rgb(var(--color-canvas)/0.95)] backdrop-blur-3xl lg:hidden"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="container-fluid max-w-7xl flex flex-col gap-1 py-3">
-              {navLinks.map((link, i) => {
-                const isActive = activeSection === link.href.slice(1);
-                return (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    className={`rounded-lg px-4 py-3 text-sm font-semibold transition-all ${
-                      isActive
-                        ? 'bg-slate-950 text-white shadow-lg'
-                        : 'text-[rgb(var(--color-muted-ink))] hover:bg-[rgb(var(--color-panel-soft)/0.5)] hover:text-[rgb(var(--color-ink))]'
-                    }`}
-                    initial={{ opacity: 0, x: -12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04 }}
-                    onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm lg:hidden"
+            />
+
+            {/* Drawer */}
+            <motion.div
+              className="fixed inset-y-0 left-0 z-[70] w-[280px] bg-[rgb(var(--color-canvas))] shadow-2xl lg:hidden"
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            >
+              <div className="flex h-full flex-col p-6">
+                <div className="mb-10 flex items-center justify-between">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[rgb(var(--color-accent))]">
+                    <span className="text-[15px] font-black text-white tracking-tighter">AGI</span>
+                  </div>
+                  <motion.button
+                    onClick={() => setIsOpen(false)}
+                    className="grid size-10 place-items-center rounded-lg border border-[rgb(var(--color-line)/0.4)] bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-muted-ink))]"
+                    whileTap={{ scale: 0.9 }}
                   >
-                    {link.label}
-                  </motion.a>
-                );
-              })}
-            </div>
-          </motion.div>
+                    <X size={20} />
+                  </motion.button>
+                </div>
+
+                <nav className="flex flex-col gap-1">
+                  {navLinks.map((link, i) => {
+                    const isActive = activeSection === link.href.slice(1);
+                    return (
+                      <motion.a
+                        key={link.href}
+                        href={link.href}
+                        className={`group flex items-center justify-between rounded-xl px-4 py-4 text-base font-bold transition-all ${
+                          isActive
+                            ? 'bg-[rgb(var(--color-accent))] text-white shadow-lg shadow-blue-600/20'
+                            : 'text-[rgb(var(--color-muted-ink))] hover:bg-[rgb(var(--color-panel-soft))] hover:text-[rgb(var(--color-ink))]'
+                        }`}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + i * 0.05 }}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleNavClick(link.href);
+                        }}
+                      >
+                        {link.label}
+                        <ArrowUpRight
+                          size={18}
+                          className={`transition-transform duration-300 ${isActive ? 'opacity-100' : 'opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'}`}
+                        />
+                      </motion.a>
+                    );
+                  })}
+                </nav>
+
+                <div className="mt-auto pt-8">
+                  <Button
+                    as="a"
+                    href="#contact"
+                    className="w-full justify-center gap-2"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick('#contact');
+                    }}
+                  >
+                    Get in touch
+                    <ArrowUpRight size={18} />
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.nav>

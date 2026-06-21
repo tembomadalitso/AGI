@@ -1,11 +1,31 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Section } from '../components/Section';
 import { Container } from '../components/Container';
 import { values } from '../utils/content';
 
 export function ValuesSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
   const trackRef = useRef(null);
+
+  // Auto-slideshow for mobile
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % values.length);
+    }, 1400);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Sync scroll position when activeIndex changes
+  useEffect(() => {
+    if (trackRef.current) {
+      const cardWidth = trackRef.current.offsetWidth - 32; // card width + some gap adjustment
+      trackRef.current.scrollTo({
+        left: activeIndex * (cardWidth + 16), // card width + gap
+        behavior: 'smooth'
+      });
+    }
+  }, [activeIndex]);
 
   return (
     <Section id="values" background="default">
@@ -59,23 +79,21 @@ export function ValuesSection() {
           })}
         </div>
 
-        {/* Mobile: horizontal scroll strip */}
-        <div className="md:hidden relative -mx-4 px-4">
+        {/* Mobile: horizontal auto-slideshow */}
+        <div className="md:hidden relative -mx-4 px-4 overflow-hidden">
           <div
             ref={trackRef}
-            className="flex gap-4 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            className="flex gap-4 overflow-x-hidden pb-8 transition-all duration-500"
           >
             {values.map((value, index) => {
               const Icon = value.icon;
+              const isActive = index === activeIndex;
               return (
                 <motion.div
                   key={index}
-                  className="w-[calc(100vw-4rem)] snap-center rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] p-6 text-left shadow-lg shrink-0"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, root: trackRef }}
-                  transition={{ delay: index * 0.08 }}
+                  className={`w-[calc(100vw-4rem)] rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] p-6 text-left shadow-lg shrink-0 transition-all duration-500 ${
+                    isActive ? 'opacity-100 scale-100 border-[rgb(var(--color-accent)/0.3)]' : 'opacity-40 scale-95'
+                  }`}
                 >
                   <div className="mb-6 grid size-11 place-items-center rounded-lg bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-accent))]">
                     <Icon size={22} strokeWidth={1.8} />
@@ -89,13 +107,22 @@ export function ValuesSection() {
               );
             })}
           </div>
-          {/* Scroll hint dots */}
-          <div className="mt-3 flex justify-center gap-1.5">
+
+          {/* Progress dots */}
+          <div className="mt-2 flex justify-center gap-2">
             {values.map((_, i) => (
-              <span
+              <button
                 key={i}
-                className="size-1.5 rounded-full bg-[rgb(var(--color-line))]"
-              />
+                onClick={() => setActiveIndex(i)}
+                className="group relative h-1.5 py-2 flex items-center"
+                aria-label={`Go to slide ${i + 1}`}
+              >
+                <div
+                  className={`h-full rounded-full transition-all duration-500 ${
+                    i === activeIndex ? 'w-6 bg-[rgb(var(--color-accent))]' : 'w-1.5 bg-[rgb(var(--color-line))]'
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

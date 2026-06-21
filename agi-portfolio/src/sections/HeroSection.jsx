@@ -121,14 +121,17 @@ export function HeroSection() {
             {/* Stats with count-up */}
             <motion.div
               variants={itemVariants}
-              className="mt-10 flex max-w-2xl flex-wrap gap-4 rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.5)] p-2 shadow-sm backdrop-blur-md"
+              className="mt-10 flex max-w-2xl flex-wrap gap-3 rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.5)] p-2 shadow-sm backdrop-blur-md sm:gap-4"
             >
               {stats.map((stat) => (
-                <div key={stat.label} className="flex-1 min-w-[120px] rounded-xl bg-[rgb(var(--color-canvas)/0.5)] p-4 border border-[rgb(var(--color-line)/0.5)] transition-all hover:bg-[rgb(var(--color-panel-soft))] group">
-                  <p className="text-3xl font-black text-[rgb(var(--color-ink))] group-hover:text-[rgb(var(--color-accent))] transition-colors">
+                <div
+                  key={stat.label}
+                  className="flex-1 min-w-[140px] rounded-xl bg-[rgb(var(--color-canvas)/0.5)] p-3 border border-[rgb(var(--color-line)/0.5)] transition-all hover:bg-[rgb(var(--color-panel-soft))] group sm:p-4"
+                >
+                  <p className="text-2xl font-black text-[rgb(var(--color-ink))] group-hover:text-[rgb(var(--color-accent))] transition-colors sm:text-3xl">
                     <CountUp end={stat.value} />
                   </p>
-                  <p className="mt-1 text-[10px] font-bold uppercase tracking-wider text-[rgb(var(--color-subtle))]">
+                  <p className="mt-1 text-[9px] font-bold uppercase tracking-wider text-[rgb(var(--color-subtle))] sm:text-[10px]">
                     {stat.label}
                   </p>
                 </div>
