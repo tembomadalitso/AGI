@@ -92,6 +92,13 @@ export default {
       boxShadow: {
         'premium': '0 10px 30px rgba(0, 0, 0, 0.1)',
         'premium-dark': '0 10px 30px rgba(0, 0, 0, 0.3)',
+        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+        'card': '0 2px 4px rgba(0,0,0,0.02), 0 10px 20px rgba(0,0,0,0.03)',
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'premium-gradient': 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
       },
     },
   },

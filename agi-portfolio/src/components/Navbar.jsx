@@ -66,23 +66,23 @@ export function Navbar() {
       <div className="container-fluid max-w-7xl flex items-center justify-between py-3">
         <motion.a
           href="#home"
-          className="flex items-center gap-3"
+          className="flex items-center gap-4"
           aria-label={`${company.name} home`}
           whileHover={{ y: -1 }}
           whileTap={{ scale: 0.95 }}
           onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}
         >
-          <span className="grid size-10 place-items-center rounded-lg bg-[rgb(var(--color-ink))] text-sm font-black text-[rgb(var(--color-canvas))]">
-            AGI
-          </span>
-          <span className="hidden sm:block">
-            <span className="block text-sm font-bold leading-4 text-[rgb(var(--color-ink))]">
-              AGI Enterprise
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[rgb(var(--color-accent))] shadow-lg shadow-blue-900/20">
+            <span className="text-[15px] font-bold text-white tracking-tighter">AGI</span>
+          </div>
+          <div className="flex flex-col border-l border-[rgb(var(--color-line))] pl-4">
+            <span className="text-[15px] font-bold tracking-tight text-[rgb(var(--color-ink))] leading-none">
+              AGI ENTERPRISE
             </span>
-            <span className="block text-xs font-medium text-[rgb(var(--color-subtle))]">
+            <span className="mt-1 text-[11px] font-medium tracking-[0.2em] text-[rgb(var(--color-subtle))] leading-none uppercase">
               Limited
             </span>
-          </span>
+          </div>
         </motion.a>
 
         {/* Desktop nav pill */}
@@ -142,7 +142,7 @@ export function Navbar() {
             className="hidden sm:inline-flex gap-2"
             onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
           >
-            Request quote
+            Get in touch
             <ArrowUpRight size={16} />
           </Button>
 

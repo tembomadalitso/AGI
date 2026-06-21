@@ -106,7 +106,7 @@ export function ContactSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              Request a quote or start a partnership conversation.
+              Start a conversation with our procurement team.
             </motion.h2>
             <motion.p
               className="text-body lg:col-start-2 lg:row-span-2 lg:row-start-1"

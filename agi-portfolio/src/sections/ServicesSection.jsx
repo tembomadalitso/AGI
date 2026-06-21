@@ -13,21 +13,21 @@ export function ServicesSection() {
       <Container>
         <motion.div
           className="mb-12 grid gap-6 lg:grid-cols-[0.82fr_1fr] lg:items-end"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }}
         >
           <div>
             <span className="text-caption text-[rgb(var(--color-accent))]">
               Products & Services
             </span>
-            <h2 className="mt-3 max-w-3xl text-4xl font-black leading-tight text-[rgb(var(--color-ink))] sm:text-5xl">
+            <h2 className="mt-3 max-w-3xl text-4xl font-bold tracking-tight leading-tight text-[rgb(var(--color-ink))] sm:text-5xl">
               A complete supply desk for operational teams.
             </h2>
           </div>
           <p className="text-body max-w-2xl lg:justify-self-end">
-            The company profile spans ICT, office, digital, hygiene, hardware, agriculture, automotive, and branding needs. Each line is presented here as a clear service path for fast qualification.
+            Our procurement capabilities span critical operational categories, ensuring institutions can source essential goods through a single, reliable partner.
           </p>
         </motion.div>
 
