@@ -1,4 +1,9 @@
 {
+  "name": "agi-root",
+  "private": true,
+  "scripts": {
+    "build": "cd agi-portfolio && npm install && npm run build"
+  },
   "devDependencies": {
     "@playwright/test": "^1.60.0"
   }
