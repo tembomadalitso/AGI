@@ -14,7 +14,7 @@ export function ValuesSection() {
     if (isPaused) return;
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % values.length);
-    }, 1400);
+    }, 4200);
     return () => clearInterval(interval);
   }, [isPaused]);
 
