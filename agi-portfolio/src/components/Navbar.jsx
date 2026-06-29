@@ -20,6 +20,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   const observerRef = useRef(null);
+  const drawerRef = useRef(null);
 
   // Track scroll for shadow
   useEffect(() => {
@@ -46,6 +47,58 @@ export function Navbar() {
     return () => observerRef.current?.disconnect();
   }, []);
 
+  // Handle Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  // Focus trapping
+  useEffect(() => {
+    if (!isOpen || !drawerRef.current) return;
+
+    const focusableElements = drawerRef.current.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusableElements.length === 0) return;
+
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    const handleTab = (e) => {
+      if (e.key !== 'Tab') return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          lastElement.focus();
+          e.preventDefault();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          firstElement.focus();
+          e.preventDefault();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleTab);
+    // Focus first element on open
+    firstElement.focus();
+
+    return () => document.removeEventListener('keydown', handleTab);
+  }, [isOpen]);
+
   const handleNavClick = (href) => {
     setIsOpen(false);
     setTimeout(() => {
@@ -54,6 +107,7 @@ export function Navbar() {
   };
 
   return (
+    <>
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 border-b border-[rgb(var(--color-line))] bg-[rgb(var(--color-canvas)/0.82)] backdrop-blur-xl transition-all duration-300 ${
         scrolled ? 'shadow-md shadow-black/5' : ''
@@ -176,41 +230,94 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      <AnimatePresence>
-        {isOpen && (
+    </motion.nav>
+
+    {/* Mobile Navigation Drawer */}
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          {/* Backdrop */}
           <motion.div
-            className="border-t border-[rgb(var(--color-line)/0.2)] bg-[rgb(var(--color-canvas)/0.95)] backdrop-blur-3xl lg:hidden"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsOpen(false)}
+          />
+
+          {/* Drawer */}
+          <motion.div
+            ref={drawerRef}
+            className="fixed inset-y-0 left-0 z-[70] w-[85%] max-w-sm bg-[rgb(var(--color-canvas)/0.95)] backdrop-blur-2xl border-r border-[rgb(var(--color-line)/0.4)] shadow-2xl lg:hidden flex flex-col"
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation"
           >
-            <div className="container-fluid max-w-7xl flex flex-col gap-1 py-3">
+            <div className="flex items-center justify-between p-6 border-b border-[rgb(var(--color-line)/0.4)]">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[rgb(var(--color-accent))] shadow-lg shadow-blue-900/20">
+                  <span className="text-[15px] font-black text-white tracking-tighter">AGI</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm font-bold text-[rgb(var(--color-ink))] leading-none">
+                    AGI ENTERPRISE
+                  </span>
+                  <span className="mt-1 text-[10px] font-medium text-[rgb(var(--color-subtle))] leading-none uppercase">
+                    Limited
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 rounded-lg bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-ink))]"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-2">
               {navLinks.map((link, i) => {
                 const isActive = activeSection === link.href.slice(1);
                 return (
                   <motion.a
                     key={link.href}
                     href={link.href}
-                    className={`rounded-lg px-4 py-3 text-sm font-semibold transition-all ${
+                    className={`rounded-xl px-5 py-4 text-base font-bold transition-all flex items-center justify-between ${
                       isActive
-                        ? 'bg-slate-950 text-white shadow-lg'
-                        : 'text-[rgb(var(--color-muted-ink))] hover:bg-[rgb(var(--color-panel-soft)/0.5)] hover:text-[rgb(var(--color-ink))]'
+                        ? 'bg-slate-950 text-white shadow-xl'
+                        : 'text-[rgb(var(--color-muted-ink))] hover:bg-[rgb(var(--color-panel-soft)/0.8)] hover:text-[rgb(var(--color-ink))]'
                     }`}
-                    initial={{ opacity: 0, x: -12 }}
+                    initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04 }}
+                    transition={{ delay: 0.1 + i * 0.05 }}
                     onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
                   >
                     {link.label}
+                    {isActive && <motion.div layoutId="active-dot" className="size-1.5 rounded-full bg-white" />}
                   </motion.a>
                 );
               })}
             </div>
+
+            <div className="p-6 border-t border-[rgb(var(--color-line)/0.4)]">
+              <Button
+                as="a"
+                href="#contact"
+                className="w-full justify-center gap-2"
+                onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
+              >
+                Get in touch
+                <ArrowUpRight size={18} />
+              </Button>
+            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+        </>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
