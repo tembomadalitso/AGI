@@ -1,11 +1,22 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Section } from '../components/Section';
 import { Container } from '../components/Container';
 import { values } from '../utils/content';
 
 export function ValuesSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const trackRef = useRef(null);
+
+  // Auto-slide logic
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % values.length);
+    }, 1400);
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   return (
     <Section id="values" background="default">
@@ -59,42 +70,78 @@ export function ValuesSection() {
           })}
         </div>
 
-        {/* Mobile: horizontal scroll strip */}
-        <div className="md:hidden relative -mx-4 px-4 overflow-hidden">
-          <div
-            ref={trackRef}
-            className="flex gap-6 overflow-x-auto pb-8 snap-x snap-mandatory hide-scrollbar"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {values.map((value, index) => {
-              const Icon = value.icon;
-              return (
-                <motion.div
-                  key={index}
-                  className="min-w-[85vw] snap-center rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] p-8 text-left shadow-lg shrink-0"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true, root: trackRef }}
-                  transition={{ delay: index * 0.08 }}
-                >
-                  <div className="mb-6 grid size-11 place-items-center rounded-lg bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-accent))]">
-                    <Icon size={22} strokeWidth={1.8} />
-                  </div>
-                  <p className="mb-3 text-xs font-black uppercase text-[rgb(var(--color-subtle))]">
-                    0{index + 1}
-                  </p>
-                  <h3 className="text-title">{value.title}</h3>
-                  <p className="mt-3 text-body-sm">{value.copy}</p>
-                </motion.div>
-              );
-            })}
+        {/* Mobile: Automatic Carousel */}
+        <div
+          className="md:hidden relative -mx-4 px-4 overflow-hidden py-10"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+        >
+          <div className="relative flex items-center justify-center h-[320px]">
+            <AnimatePresence mode="popLayout">
+              {values.map((value, index) => {
+                const Icon = value.icon;
+                const isCenter = index === activeIndex;
+                const isLeft = index === (activeIndex - 1 + values.length) % values.length;
+                const isRight = index === (activeIndex + 1) % values.length;
+
+                if (!isCenter && !isLeft && !isRight) return null;
+
+                return (
+                  <motion.div
+                    key={index}
+                    className="absolute w-[80vw] rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel))] p-8 text-left shadow-xl shrink-0"
+                    initial={isRight ? { x: '100%', opacity: 0, scale: 0.8 } : { x: '-100%', opacity: 0, scale: 0.8 }}
+                    animate={{
+                      x: isCenter ? 0 : isLeft ? '-90%' : '90%',
+                      opacity: isCenter ? 1 : 0.4,
+                      scale: isCenter ? 1 : 0.9,
+                      zIndex: isCenter ? 10 : 5,
+                    }}
+                    exit={{
+                      x: isLeft ? '-100%' : '100%',
+                      opacity: 0,
+                      scale: 0.8,
+                    }}
+                    transition={{
+                      type: 'spring',
+                      stiffness: 300,
+                      damping: 30,
+                    }}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    onDragEnd={(_, info) => {
+                      if (info.offset.x < -50) setActiveIndex((prev) => (prev + 1) % values.length);
+                      if (info.offset.x > 50) setActiveIndex((prev) => (prev - 1 + values.length) % values.length);
+                    }}
+                  >
+                    <div className="mb-6 grid size-11 place-items-center rounded-lg bg-[rgb(var(--color-panel-soft))] text-[rgb(var(--color-accent))]">
+                      <Icon size={22} strokeWidth={1.8} />
+                    </div>
+                    <p className="mb-3 text-xs font-black uppercase text-[rgb(var(--color-subtle))]">
+                      0{index + 1}
+                    </p>
+                    <h3 className="text-title">{value.title}</h3>
+                    <p className="mt-3 text-body-sm">{value.copy}</p>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           </div>
+
           {/* Scroll hint dots */}
-          <div className="mt-3 flex justify-center gap-1.5">
+          <div className="mt-8 flex justify-center gap-2">
             {values.map((_, i) => (
-              <span
+              <button
                 key={i}
-                className="size-1.5 rounded-full bg-[rgb(var(--color-line))]"
+                onClick={() => setActiveIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === activeIndex
+                    ? 'w-6 bg-[rgb(var(--color-accent))]'
+                    : 'w-1.5 bg-[rgb(var(--color-line))] hover:bg-[rgb(var(--color-subtle))]'
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
               />
             ))}
           </div>

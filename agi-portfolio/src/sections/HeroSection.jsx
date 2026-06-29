@@ -123,10 +123,10 @@ export function HeroSection() {
             {/* Stats with count-up */}
             <motion.div
               variants={itemVariants}
-              className="mt-10 flex max-w-2xl flex-wrap gap-4 rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.5)] p-2 shadow-sm backdrop-blur-md"
+              className="mt-10 flex max-w-2xl flex-col sm:flex-row flex-wrap gap-4 rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.5)] p-2 shadow-sm backdrop-blur-md"
             >
               {stats.map((stat) => (
-                <div key={stat.label} className="flex-1 min-w-[120px] rounded-xl bg-[rgb(var(--color-canvas)/0.5)] p-4 border border-[rgb(var(--color-line)/0.5)] transition-all hover:bg-[rgb(var(--color-panel-soft))] group">
+                <div key={stat.label} className="flex-1 w-full sm:w-auto sm:min-w-[120px] rounded-xl bg-[rgb(var(--color-canvas)/0.5)] p-4 border border-[rgb(var(--color-line)/0.5)] transition-all hover:bg-[rgb(var(--color-panel-soft))] group">
                   <p className="text-3xl font-black text-[rgb(var(--color-ink))] group-hover:text-[rgb(var(--color-accent))] transition-colors">
                     <CountUp end={stat.value} />
                   </p>
@@ -140,8 +140,8 @@ export function HeroSection() {
 
           <motion.div variants={itemVariants} className="relative" style={{ y: y1, rotate }}>
             <div className="absolute -inset-10 rounded-[2rem] bg-[rgb(var(--color-accent)/0.15)] blur-[100px]" />
-            <div className="relative overflow-hidden rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.6)] p-4 shadow-2xl shadow-black/20 backdrop-blur-2xl">
-              <div className="rounded-lg bg-[rgb(var(--color-ink))] p-5 text-[rgb(var(--color-canvas))]">
+            <div className="relative rounded-2xl border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel)/0.6)] p-4 shadow-2xl shadow-black/20 backdrop-blur-2xl">
+              <div className="rounded-lg bg-slate-950 p-5 text-white">
                 <div className="flex items-center justify-between border-b border-white/10 pb-5">
                   <div>
                     <p className="text-xs font-bold uppercase text-white/45">Enterprise supply desk</p>
@@ -160,14 +160,14 @@ export function HeroSection() {
                     return (
                       <motion.div
                         key={item.label}
-                        className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.04] p-4"
+                        className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 rounded-lg border border-white/10 bg-white/[0.04] p-4"
                         initial={{ opacity: 0, x: 18 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.45 + index * 0.12 }}
                         whileHover={{ backgroundColor: 'rgba(255,255,255,0.07)', x: 2 }}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="grid size-10 place-items-center rounded-lg bg-white/10 text-[rgb(var(--color-accent-soft))]">
+                          <span className="grid size-10 place-items-center rounded-lg bg-white/10 text-blue-400">
                             <Icon size={20} />
                           </span>
                           <span className="text-sm font-bold">{item.label}</span>
@@ -179,7 +179,7 @@ export function HeroSection() {
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-2 gap-4">
+              <div className="mt-4 grid grid-cols-1 xs:grid-cols-2 gap-4">
                 <div className="rounded-lg border border-[rgb(var(--color-line))] bg-[rgb(var(--color-panel-soft))] p-4">
                   <p className="text-xs font-bold uppercase text-[rgb(var(--color-subtle))]">Coverage</p>
                   <p className="mt-2 text-lg font-black text-[rgb(var(--color-ink))]">Public & private sector</p>
